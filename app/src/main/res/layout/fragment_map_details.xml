@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="place"
+            type="ru.romanblack.mapdemo.data.entity.Place" />
+
+        <variable
+            name="imageUrl"
+            type="java.lang.String" />
+    </data>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/details_image_default_height"
+                        android:scaleType="center"
+                        app:imageUrl="@{imageUrl}" />
+
+                    <View
+                        android:id="@+id/imageGradient"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/details_gradient_height"
+                        android:layout_alignBottom="@+id/image"
+                        android:background="@drawable/white_gradient" />
+
+                    <LinearLayout
+                        android:id="@+id/infosLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/details_info_top_margin"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/horizontal_padding"
+                        android:paddingLeft="@dimen/horizontal_padding"
+                        android:paddingRight="@dimen/horizontal_padding">
+
+                        <TextView
+                            android:id="@+id/title"
+                            style="@style/DetailsTitle"
+                            android:text="@{place.name}"
+                            android:visibility="@{TextUtils.isEmpty(place.name) ? View.GONE : View.VISIBLE}"
+                            tools:text="Some Title" />
+
+                        <TextView
+                            android:id="@+id/address"
+                            style="@style/DetailsText"
+                            android:text="@{place.address}"
+                            android:visibility="@{TextUtils.isEmpty(place.address) ? View.GONE : View.VISIBLE}"
+                            tools:text="Some City, Some Street, 7" />
+
+                        <TextView
+                            android:id="@+id/phone"
+                            style="@style/DetailsText"
+                            android:text="@{place.phone}"
+                            android:visibility="@{TextUtils.isEmpty(place.phone) ? View.GONE : View.VISIBLE}"
+                            tools:text="+1(234)567-89-00" />
+
+                        <TextView
+                            android:id="@+id/website"
+                            style="@style/DetailsText"
+                            android:text="@{place.website}"
+                            android:visibility="@{TextUtils.isEmpty(place.website) ? View.GONE : View.VISIBLE}"
+                            tools:text="www.doesnotexist.ru" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</layout>
